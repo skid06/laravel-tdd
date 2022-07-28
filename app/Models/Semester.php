@@ -15,4 +15,5 @@ class Semester extends Model
     {
         return $this->belongsToMany(Enrollments::class);
     }
+    
 }

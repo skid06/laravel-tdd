@@ -27,8 +27,8 @@ class Subject extends Model
         return $this->belongsToMany(Curricula::class);
     }
     
-    // public function enrollments()
-    // {
-    //     return $this->belongsTo(Enrollments::class);
-    // }
+    public function enrollments()
+    {
+        return $this->belongsToMany(Enrollments::class);
+    }
 }

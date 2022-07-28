@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('semester_id')->constrained();
             $table->foreignId('subject_id')->constrained();
-            $table->foreignId('course_id')->constrained();
+            $table->foreignId('course_id')->nullable()->constrained();
             $table->foreignId('school_year_id')->constrained();
             $table->boolean('strict_to_course')->default(0);
-            $table->integer('max_students');
             $table->string('status');
             $table->timestamps();
         });

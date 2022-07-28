@@ -9,6 +9,8 @@ class Enrollment extends Model
 {
     use HasFactory;
     
+    protected $guarded = [];
+    
     public function subjects()
     {
         return $this->hasMany(Subject::class);
@@ -16,7 +18,7 @@ class Enrollment extends Model
     
     public function course()
     {
-        return $this->belongsTo(Course::class);
+        return $this->hasMany(Course::class);
     }
     
     public function semester()
