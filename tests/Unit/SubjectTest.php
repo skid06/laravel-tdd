@@ -75,14 +75,14 @@ class SubjectTest extends TestCase
             'status' => 'open'
         ]);
         
-        $users[1]->addCourse($courses[1], 'active');  
+        $users[0]->addCourse($courses[1], 'active');  
         $users[0]->addCourse($courses[2], 'inactive');  
-        $this->assertEquals('active', $users[1]->activeCourse()[0]->pivot->status);
+        $this->assertEquals('active', $users[0]->activeCourse()[0]->pivot->status);
         $this->assertCount(2, Enrollment::all());
-        echo($users[1]->activeCourse()[0]->curriculas->pluck('subject_id'));
+        // echo($users[0]->activeCourse()[0]->curriculas->pluck('subject_id')->toArray());
         $subj = Subject::where('id', 1)->first();
-        echo $users[1]->enrollSubject($subj->id);
-        echo $subj->id;
+        echo $users[0]->enrollSubject(101);
+        // echo $subj->id;
         // $this->assertTrue(true);
     }
 }

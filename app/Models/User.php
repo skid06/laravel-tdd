@@ -67,7 +67,7 @@ class User extends Authenticatable
     
     public function checkIfSubjectIsInCurriculum(int $subject_id)
     {
-        if(!in_array($subject_id, $this->activeCourse()[0]->curriculas->pluck('subject_id'))) {
+        if(!in_array($subject_id, $this->activeCourse()[0]->curriculas->pluck('subject_id')->toArray())) {
             return false;
         }
         return true;
@@ -76,7 +76,7 @@ class User extends Authenticatable
     public function enrollSubject(int $subject_id)
     {
         if(!$this->checkIfSubjectIsInCurriculum($subject_id)) {
-            abort('This subject is not in your course curriculum');
+            return('This subject is not in your course curriculum');
         }
         return 'This subject is in your course';
         // Enroll subject
