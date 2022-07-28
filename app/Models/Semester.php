@@ -10,4 +10,9 @@ class Semester extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description'];
+    
+    public function enrollments()
+    {
+        return $this->belongsToMany(Enrollments::class);
+    }
 }

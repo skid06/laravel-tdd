@@ -41,7 +41,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    
     public function subjects()
     {
         return $this->belongsToMany(Subject::class);
@@ -49,6 +49,20 @@ class User extends Authenticatable
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class , 'course_user', 'user_id', 'course_id')->withPivot('status');
     }
+
+    public function addCourse($course, $status)
+    {
+        $this->courses()->attach($course, ['status' => $status]);
+    }
+    
+    public function activeCourse()
+    {
+        return $this
+                ->courses
+                ->filter(fn($course) => $course->pivot->status === "active");
+                //->map(fn($course) => $course);
+    }
+    
 }

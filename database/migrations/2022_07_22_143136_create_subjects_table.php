@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->float('units');
+            $table->integer('requirement_subject_id')->nullable();
             $table->timestamps();
         });
     }

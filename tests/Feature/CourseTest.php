@@ -24,6 +24,7 @@ class CourseTest extends TestCase
             ->post('/api/courses', [
                 'name' => '',
                 'description' => 'Test',
+                'status' => 'active'
             ]);
 
         $response->assertSessionHasErrors('name');
@@ -35,6 +36,7 @@ class CourseTest extends TestCase
             ->post('/api/courses', [
                 'name' => 'Test',
                 'description' => '',
+                'status' => 'active'
             ]);
 
         $response->assertSessionHasErrors('description');
@@ -48,6 +50,7 @@ class CourseTest extends TestCase
             ->post('/api/courses', [
                 'name' => 'Cool Book Title',
                 'description' => 'Test',
+                'status' => 'active'
             ]);
 
         $response->assertStatus(201);
@@ -64,6 +67,7 @@ class CourseTest extends TestCase
         $this->post('/api/courses', [
             'name' => 'Cool Book Title',
             'description' => 'Test',
+            'status' => 'active'
         ]);
 
         $course = Course::first();

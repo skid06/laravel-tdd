@@ -20,4 +20,15 @@ class Subject extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+    // subjects belongs to many curriculum and vice versa
+
+    public function curriculas()
+    {
+        return $this->belongsToMany(Curricula::class);
+    }
+    
+    // public function enrollments()
+    // {
+    //     return $this->belongsTo(Enrollments::class);
+    // }
 }

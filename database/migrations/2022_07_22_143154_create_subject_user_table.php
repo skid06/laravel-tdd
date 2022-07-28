@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enroll_subject', function (Blueprint $table) {
+        Schema::create('enrollment_user', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('enrollment_id')->constrained();
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enroll_subject');
+        Schema::dropIfExists('enrollment_user');
     }
 };
