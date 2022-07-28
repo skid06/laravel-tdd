@@ -64,6 +64,7 @@ class SubjectTest extends TestCase
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
             'strict_to_course' => 0,
+            'max_students' => 50,
             'status' => 'open'
         ]);
         
@@ -72,6 +73,7 @@ class SubjectTest extends TestCase
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
             'strict_to_course' => 0,
+            'max_students' => 50,
             'status' => 'open'
         ]);
         
