@@ -25,4 +25,9 @@ class Enrollment extends Model
     {
         return $this->hasMany(Semester::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(Enrollment::class , 'enrollment_user', 'user_id', 'enrollment_id')->withPivot('status');
+    }
 }
