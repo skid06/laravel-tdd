@@ -19,6 +19,7 @@ class CourseFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => fake()->sentence(),
+            'code' => fake()->name(),
             'status' => fake()->randomElement(['active', 'inactive'])
         ];
     }

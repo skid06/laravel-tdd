@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'status'];
+    protected $fillable = ['name', 'description', 'code', 'status'];
 
     public function users()
     {
@@ -26,11 +26,11 @@ class Course extends Model
         return $this->belongsToMany(Enrollments::class);
     }
     
-    public function addSubject($subject, $user)
-    {
-        $this->curriculas()->create([
-            'subject_id' => $subject->id,
-            'user_id' => $user->id
-        ]);
-    }
+    // public function addSubject($subject, $user)
+    // {
+    //     $this->curriculas()->create([
+    //         'subject_id' => $subject->id,
+    //         'user_id' => $user->id // Dean Role
+    //     ]);
+    // }
 }

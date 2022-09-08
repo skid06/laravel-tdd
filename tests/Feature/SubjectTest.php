@@ -33,5 +33,6 @@ class SubjectTest extends TestCase
         ]);
 
         $response->assertStatus(201);
+        $response->assertSee('Math 1');
     }
 }

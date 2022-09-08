@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\EnrollmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('courses', CourseController::class);
     Route::resource('semesters', SemesterController::class);
     Route::resource('subjects', SubjectController::class);
+    Route::resource('enrollments', EnrollmentController::class);
+    Route::post('courses/curriculum/subject/add', [CourseController::class, 'addSubjectToCurriculum']);
+    Route::post('courses/open/subject/{subject_id}', [CourseController::class, 'openSubjectForEnrollment']);
+    Route::post('courses/user/add/{course_id}', [CourseController::class, 'userAddCourse']);
 });
-// Route::resource('courses', CourseController::class);

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -55,47 +56,6 @@ class User extends Authenticatable
     public function enrollments()
     {
         return $this->belongsToMany(Enrollment::class , 'enrollment_user', 'user_id', 'enrollment_id')->withPivot('status');
-    }
-
-    public function addEnrollment($enrollment, $status)
-    {
-        $this->enrollments()->attach($enrollment, ['status' => $status]);
-    }
-
-    public function addCourse($course, $status)
-    {
-        $this->courses()->attach($course, ['status' => $status]);
-    }
-    
-    public function activeCourse()
-    {
-        // dd(gettype($this->courses));
-        if(!$this->courses()->exists()) {
-            return $this->courses;
-        }
-
-        return $this
-                ->courses
-                ->filter(fn($course) => $course->pivot->status === "active");
-                //->map(fn($course) => $course);
-    }
-    
-    public function checkIfSubjectIsInCurriculum(int $subject_id)
-    {
-        if(!in_array($subject_id, $this->activeCourse()[0]->curriculas->pluck('subject_id')->toArray())) {
-            return false;
-        }
-        return true;
-    }
-    
-    public function enrollSubject(int $subject_id, int $enrollment, string $status)
-    {
-        if(!$this->checkIfSubjectIsInCurriculum($subject_id)) {
-            return('This subject is not in your course curriculum');
-        }
-        // Enroll subject
-        $this->addEnrollment($enrollment, $status);
-        return 'This subject is in your course';
     }
     
 }

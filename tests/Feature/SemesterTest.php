@@ -26,6 +26,7 @@ class SemesterTest extends TestCase
             ]);
 
         $response->assertSessionHasErrors('name');
+        // $response->assertStatus(201);
     }
 
     public function test_a_course_description_is_required()
