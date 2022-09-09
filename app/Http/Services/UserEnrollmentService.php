@@ -43,15 +43,6 @@ class UserEnrollmentService
             'message' => $message
         ], 201); 
     }
-
-    public function hasActiveCourse()
-    {
-        if(!$this->user->courses()->exists()) {
-            return false;
-        }
-
-        return true;
-    }
     
     public function activeCourse()
     {
@@ -59,7 +50,7 @@ class UserEnrollmentService
             return "No user was given";
         }
 
-        if(!$this->hasActiveCourse()) {
+        if(!$this->user->courses()->exists()) {
             return $this->user->courses; // empty courses []
         }
 
