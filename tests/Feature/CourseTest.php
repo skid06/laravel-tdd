@@ -132,7 +132,8 @@ class CourseTest extends TestCase
         ]);
 
         $users = User::factory()->count(4)->create();
-        $deans = User::factory()->count(4)->create(['role' => '4']);
+        $deans = User::factory()->count(4)->create(['role' => '3']);
+        $professors = User::factory(5)->create(['role' => '5']);
 
         $response = $this->actingAs($deans[3])
             ->post('/api/courses/curriculum/subject/add', [
@@ -149,6 +150,7 @@ class CourseTest extends TestCase
                 'semester_id' => $semester1->id,
                 'course_id' => $courses[1]->id,
                 'school_year_id' => $school_year->id,
+                'professor_id' => $professors[1]->id,
                 'status' => true
             ]);
 

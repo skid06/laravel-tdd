@@ -25,6 +25,8 @@ class SubjectTest extends TestCase
      */
     public function test_a_subject_to_be_opened_for_enrollment()
     {
+        $deans = User::factory(5)->create(['role' => '3']);
+        $professors = User::factory(5)->create(['role' => '5']);
         $subjects = Subject::factory()->count(50)->create();            
         $subjects2 = Subject::factory()->count(50)->create();
         $subjects3 = Subject::factory()->count(50)->create();
@@ -55,6 +57,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[0]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 0,
             'max_students' => 50,
             'status' => 'open'
@@ -64,6 +68,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[22]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 0,
             'max_students' => 50,
             'status' => 'open'
@@ -82,6 +88,7 @@ class SubjectTest extends TestCase
         $subjects4 = Subject::factory()->count(50)->create();
         $subjects5 = Subject::factory()->count(50)->create();
         $deans = User::factory()->count(5)->create(['role' => '3']);
+        $professors = User::factory()->count(5)->create(['role' => '5']);
 
         $courseService1 = new CourseService($deans[1], $courses[3]);
         foreach ($subjects as $subject) {
@@ -117,6 +124,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[0]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 0,
             'max_students' => 50,
             'status' => 'open'
@@ -126,6 +135,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[22]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 0,
             'max_students' => 50,
             'status' => 'open'
@@ -135,6 +146,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[23]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 0,
             'max_students' => 50,
             'status' => 'open'
@@ -159,7 +172,8 @@ class SubjectTest extends TestCase
         $subjects = Subject::factory()->count(50)->create();            
         $subjects2 = Subject::factory()->count(50)->create();
         $subjects3 = Subject::factory()->count(50)->create();
-        $deans = User::factory()->count(5)->create(['role' => '3']);
+        $deans = User::factory(5)->create(['role' => '3']);
+        $professors = User::factory(5)->create(['role' => '5']);
 
         $courseService1 = new CourseService($deans[2], $courses[1]);
         foreach ($subjects as $subject) {
@@ -200,6 +214,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects2[40]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 0,
             'max_students' => 50,
             'status' => 'open'
@@ -209,6 +225,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[22]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 1,
             'course_id' => $courses[2]->id,
             'max_students' => 50,
@@ -219,6 +237,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[43]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'strict_to_course' => 0,
             'max_students' => 50,
             'status' => 'open'
@@ -228,6 +248,8 @@ class SubjectTest extends TestCase
             'subject_id' => $subjects[40]->id,
             'semester_id' => $semester1->id,
             'school_year_id' => $school_year->id,
+            'added_by' => $deans[1]->id,
+            'professor_id' => $professors[1]->id,
             'course_id' => $courses[2]->id,
             'max_students' => 50,
             'status' => 'open'
@@ -258,7 +280,8 @@ class SubjectTest extends TestCase
         $subjects = Subject::factory()->count(50)->create();            
         $subjects2 = Subject::factory()->count(50)->create();
         $subjects3 = Subject::factory()->count(50)->create();
-        $deans = User::factory()->count(4)->create(['role' => '3']);
+        $deans = User::factory(5)->create(['role' => '3']);
+        $professors = User::factory(5)->create(['role' => '5']);
 
         $courseService1 = new CourseService($deans[1], $courses[1]);
         foreach ($subjects as $subject) {
@@ -307,6 +330,8 @@ class SubjectTest extends TestCase
                 'subject_id' => $subject,
                 'semester_id' => $semester1->id,
                 'school_year_id' => $school_year->id,
+                'added_by' => $deans[1]->id,
+                'professor_id' => $professors[1]->id,
                 'strict_to_course' => 0,
                 'max_students' => 50,
                 'status' => 'open'

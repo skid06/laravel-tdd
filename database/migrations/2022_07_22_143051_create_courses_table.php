@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('description')->nullable();
+            $table->foreignId('department_id')->nullable()->constrained();
             $table->string('status');
             $table->timestamps();
         });

@@ -40,6 +40,7 @@ class EnrollmentTest extends TestCase
 
         $users = User::factory()->count(4)->create();
         $deans = User::factory()->count(4)->create(['role' => '3']);
+        $professors = User::factory(5)->create(['role' => '5']);
 
         $response = $this->actingAs($deans[1])
             ->post('/api/courses/curriculum/subject/add', [
@@ -58,6 +59,7 @@ class EnrollmentTest extends TestCase
                 'semester_id' => $semester1->id,
                 'course_id' => $courses[1]->id,
                 'school_year_id' => $school_year->id,
+                'professor_id' => $professors[1]->id,
                 'status' => true
             ]);
 
@@ -89,8 +91,9 @@ class EnrollmentTest extends TestCase
             'description' => 'First School Year'
         ]);
 
-        $users = User::factory()->count(4)->create();
-        $deans = User::factory()->count(4)->create(['role' => '3']);
+        $users = User::factory(5)->create(['role' => '6']);
+        $deans = User::factory(5)->create(['role' => '3']);
+        $professors = User::factory(5)->create(['role' => '5']);
 
         $response = $this->actingAs($deans[1])
             ->post('/api/courses/curriculum/subject/add', [
@@ -106,6 +109,7 @@ class EnrollmentTest extends TestCase
             ->post('/api/courses/open/subject/'.$subjects[1]->id, [
                 'semester_id' => $semester1->id,
                 'course_id' => $courses[1]->id,
+                'professor_id' => $professors[1]->id,
                 'school_year_id' => $school_year->id,
                 'status' => true
             ]);

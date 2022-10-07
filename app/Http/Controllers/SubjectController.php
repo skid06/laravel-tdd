@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubjectRequest;
@@ -87,5 +88,15 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addSubject(Subject $subject)
+    {
+        $data = auth()->user()->professor_subjects()->attach($subject);
+
+        return response()->json([
+            'data' => $data,
+            'message' => 'A professor has added a subject.'
+        ], 201);
     }
 }

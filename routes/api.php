@@ -29,4 +29,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('courses/curriculum/subject/add', [CourseController::class, 'addSubjectToCurriculum']);
     Route::post('courses/open/subject/{subject_id}', [CourseController::class, 'openSubjectForEnrollment']);
     Route::post('courses/user/add/{course_id}', [CourseController::class, 'userAddCourse']);
+    Route::post('subjects/professor/add/{subject}', [SubjectController::class, 'addSubject']);
 });

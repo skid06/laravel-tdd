@@ -12,6 +12,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const SUPER_ADMIN = 1;
+    const ADMIN = 2;
+    const DEAN = 3;
+    const REGISTRAR = 4;
+    const PROFESSOR = 5;
+    const STUDENT = 6;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +30,8 @@ class User extends Authenticatable
         'password',
         'role'
     ];
+
+    // protected $with = ['professor_subjects'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,6 +55,12 @@ class User extends Authenticatable
     public function subjects()
     {
         return $this->belongsToMany(Subject::class);
+        // return $this->belongsToMany(Subject::class , 'professor_subject', 'subject_id', 'professor_id');
+    }
+
+    public function professor_subjects()
+    {
+        return $this->belongsToMany(Subject::class , 'professor_subject', 'user_id', 'subject_id');
     }
 
     public function courses()

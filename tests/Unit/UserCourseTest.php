@@ -49,7 +49,8 @@ class UserCourseTest extends TestCase
     
     public function test_a_student_has_active_course()
     {
-        $deans = User::factory()->count(5)->create(['role' => '3']);
+        $deans = User::factory(5)->create(['role' => '3']);
+        $professors = User::factory(5)->create(['role' => '5']);
         $students = User::factory()->count(5)->create(['role' => '6']);
         $courses = Course::factory()->count(5)->create();
         $subjects = Subject::factory()->count(50)->create();            
@@ -78,7 +79,7 @@ class UserCourseTest extends TestCase
             $courseService2->addSubjectToCurriculum($subject);
         }
         // echo "Active Course from Course Service: " . $courseService2->activeCourse();
-        $courseService2->openSubjectForEnrollment($subjects2[3]->id, $semester1->id, $school_year->id, true);
+        $courseService2->openSubjectForEnrollment($subjects2[3]->id, $professors[1]->id, $semester1->id, $school_year->id, true);
         // $this->assertEquals("This subject has been opened strictly to course for enrollment", $courseService2->openSubjectForEnrollment($subjects2[3]->id, $semester1->id, $school_year->id, true));
         
         // dd($courses[3]->curriculas);

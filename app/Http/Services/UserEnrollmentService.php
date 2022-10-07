@@ -7,7 +7,7 @@ use App\Models\Enrollment;
 
 class UserEnrollmentService
 {
-    public $user;
+    protected $user;
     /**
      * @user param
      * is optional as child class will not always need this param
@@ -23,13 +23,11 @@ class UserEnrollmentService
             abort(403, $message);
         }
 
-        // check if the user is allowed to enroll for the students
         $allowed_roles = [4,6]; // student and registrar
         if(!in_array($this->user->role, $allowed_roles)) {
             abort(403, "The user is not allowed to enroll for the students.");
         }
 
-        // TODO: check if status is allowed
         $allowed_roles = ["active", "completed", "incomplete" , "pending"];
         if(!in_array($status, $allowed_roles)) {
             abort(403, "The status is not allowed.");
@@ -63,10 +61,7 @@ class UserEnrollmentService
         // use $activeCourseSubjectIds if users can have many active courses
         //$activeCourseSubjectIds = $this->user->activeCourse()->map(fn($course) => $course->curriculas->pluck('subject_id')->toArray());
         
-        if(!in_array($subject_id, $this->activeCourse()->curriculas->pluck('subject_id')->toArray())) {
-            return false;
-        }
-        return true;
+        return in_array($subject_id, $this->activeCourse()->curriculas->pluck('subject_id')->toArray());
     }
     
     public function enrollSubject(Enrollment $enrollment, $status)
@@ -77,12 +72,10 @@ class UserEnrollmentService
         }
 
         // check if the user is allowed to enroll for the students
-        $allowed_roles = [4,6]; // student and dean
+        $allowed_roles = [3,6]; // student and dean
         if(!in_array($this->user->role, $allowed_roles)) {
             abort(403, "The user is not allowed to enroll for the students.");
         }
-
-        // Todo: check if role is student, if not return false
         
         if(gettype($status) != 'string') {
             abort(403, "Status has to be a string.");
